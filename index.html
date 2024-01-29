@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulario Responsivo con Bootstrap</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="manifest" href="json/manifest.json">
+</head>
+<body>
+  <div class="container mt-5">
+    <form id="formulario">
+      <div class="form-group">
+        <label for="pais">País:</label>
+        <select class="form-control" id="pais" onchange="cargarEstados()">
+          <option value="">Seleccione un país</option>
+          <option value="mexico">México</option>
+          <option value="colombia">Colombia</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="estado">Estado:</label>
+        <select class="form-control" id="estado" onchange="cargarMunicipios()" disabled>
+          <option value="">Seleccione un estado</option>
+          <!-- Aquí se cargarán dinámicamente los estados -->
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="municipio">Municipio:</label>
+        <select class="form-control" id="municipio" onchange="cargarLocalidades()" disabled>
+          <option value="">Seleccione un municipio</option>
+          <!-- Aquí se cargarán dinámicamente los municipios -->
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="localidad">Localidad:</label>
+        <select class="form-control" id="localidad" disabled>
+          <option value="">Seleccione una localidad</option>
+          <!-- Aquí se cargarán dinámicamente las localidades -->
+        </select>
+      </div>
+      <button type="button" class="btn btn-primary" onclick="mostrarDatosSeleccionados()">Enviar</button>
+    </form>
+
+    <div id="datos-seleccionados" class="mt-5">
+      <h2>Datos Seleccionados</h2>
+      <p id="pais-seleccionado"></p>
+      <p id="estado-seleccionado"></p>
+      <p id="municipio-seleccionado"></p>
+      <p id="localidad-seleccionada"></p>
+    </div>
+  </div>
+</body>
+<script src="js/index.js"></script>
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+      navigator.serviceWorker.register('js/service-worker.js').then(function(registration) {
+        console.log('ServiceWorker registration successful with scope: ', registration.scope);
+      }, function(err) {
+        console.log('ServiceWorker registration failed: ', err);
+      });
+    });
+  }
+</script>  
+</html>
