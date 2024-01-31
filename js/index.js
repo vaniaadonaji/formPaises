@@ -23,9 +23,21 @@ const estadosMexico = {
     }
   };
 
-  const municipiosColombia = {
-    "Cali": ["Localidad 28", "Localidad 29", "Localidad 30"],
-    "Medellín": ["Localidad 31", "Localidad 32", "Localidad 33"]
+  const estadosColombia = {
+    "Cali": {
+      "municipios": {
+        "Santiago de Cali": ["San Antonio", "San Fernando", "Granada"],
+        "Buenaventura": ["Ciudadela Sucre", "Puente Nayero", "La Playita"],
+        "Palmira": ["Barrio El Trébol", "Urbanización Pance", "Barrio La Villa"]
+      }
+    },
+    "Medellín": {
+      "municipios": {
+        "Envigado": ["Barrio Alcalá", "Barrio Jardines", "Barrio Mesa"],
+        "Bello": ["Niquía", "Cabañas", "Zamora"],
+        "Itagüí": ["El Poblado", "Santa María", "Calatrava"]
+      }
+    }
   };
 
   let paisSeleccionado;
@@ -46,11 +58,11 @@ const estadosMexico = {
 
       estadoSelect.disabled = false;
     } else if (paisSeleccionado === "colombia") {
-      for (const municipio in municipiosColombia) {
-        const opcionMunicipio = document.createElement("option");
-        opcionMunicipio.value = municipio;
-        opcionMunicipio.textContent = municipio;
-        estadoSelect.appendChild(opcionMunicipio);
+      for (const estadoC in estadosColombia) {
+        const opcionEstado = document.createElement("option");
+        opcionEstado.value = estadoC;
+        opcionEstado.textContent = estadoC;
+        estadoSelect.appendChild(opcionEstado);
       }
 
       estadoSelect.disabled = false;
@@ -61,7 +73,6 @@ const estadosMexico = {
     // Al cambiar de país, reiniciar las selecciones posteriores
     document.getElementById("municipio").innerHTML = "<option value=''>Seleccione un municipio</option>";
     document.getElementById("localidad").innerHTML = "<option value=''>Seleccione una localidad</option>";
-    mostrarDatosSeleccionados();
   }
 
   function cargarMunicipios() {
@@ -79,8 +90,8 @@ const estadosMexico = {
       }
 
       municipioSelect.disabled = false;
-    } else if (paisSeleccionado === "colombia" && estadoSeleccionado in municipiosColombia) {
-      for (const municipio in municipiosColombia[estadoSeleccionado]) {
+    } else if (paisSeleccionado === "colombia" && estadoSeleccionado in estadosColombia) {
+      for (const municipio in estadosColombia[estadoSeleccionado].municipios) {
         const opcionMunicipio = document.createElement("option");
         opcionMunicipio.value = municipio;
         opcionMunicipio.textContent = municipio;
@@ -94,7 +105,6 @@ const estadosMexico = {
 
     // Al cambiar de estado, reiniciar las selecciones posteriores
     document.getElementById("localidad").innerHTML = "<option value=''>Seleccione una localidad</option>";
-    mostrarDatosSeleccionados();
   }
 
   function cargarLocalidades() {
@@ -116,9 +126,9 @@ const estadosMexico = {
 
         localidadSelect.disabled = false;
       }
-    } else if (paisSeleccionado === "colombia" && estadoSeleccionado in municipiosColombia) {
-      if (municipioSeleccionado in municipiosColombia[estadoSeleccionado]) {
-        for (const localidad of municipiosColombia[estadoSeleccionado][municipioSeleccionado]) {
+    } else if (paisSeleccionado === "colombia" && estadoSeleccionado in estadosColombia) {
+      if (municipioSeleccionado in estadosColombia[estadoSeleccionado].municipios) {
+        for (const localidad of estadosColombia[estadoSeleccionado].municipios[municipioSeleccionado]) {
           const opcionLocalidad = document.createElement("option");
           opcionLocalidad.value = localidad;
           opcionLocalidad.textContent = localidad;
@@ -131,7 +141,6 @@ const estadosMexico = {
       localidadSelect.disabled = true;
     }
 
-    mostrarDatosSeleccionados();
   }
 
   function mostrarDatosSeleccionados() {

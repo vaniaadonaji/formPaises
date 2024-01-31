@@ -22,21 +22,18 @@
         <label for="estado">Estado:</label>
         <select class="form-control" id="estado" onchange="cargarMunicipios()" disabled>
           <option value="">Seleccione un estado</option>
-          <!-- Aquí se cargarán dinámicamente los estados -->
         </select>
       </div>
       <div class="form-group">
         <label for="municipio">Municipio:</label>
         <select class="form-control" id="municipio" onchange="cargarLocalidades()" disabled>
           <option value="">Seleccione un municipio</option>
-          <!-- Aquí se cargarán dinámicamente los municipios -->
         </select>
       </div>
       <div class="form-group">
         <label for="localidad">Localidad:</label>
         <select class="form-control" id="localidad" disabled>
           <option value="">Seleccione una localidad</option>
-          <!-- Aquí se cargarán dinámicamente las localidades -->
         </select>
       </div>
       <button type="button" class="btn btn-primary" onclick="mostrarDatosSeleccionados()">Enviar</button>
